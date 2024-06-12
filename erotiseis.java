@@ -85,9 +85,9 @@ class er_multChoice extends erotiseis {
 
     public double getPerc() {return super.getPerc();}
 
-    public void makePerc(){
-        super.makePerc();
-    }
+    //public void makePerc(){
+    //    super.makePerc();
+    //}
 }
 
 class er_oneWord extends erotiseis{
@@ -120,9 +120,9 @@ class er_oneWord extends erotiseis{
 
     public double getPerc() {return super.getPerc();}
 
-    public void makePerc(){
-        super.makePerc();
-    }
+    //public void makePerc(){
+    //    super.makePerc();
+    //}
 }
 
 class er_kena extends erotiseis{
@@ -155,7 +155,7 @@ class er_kena extends erotiseis{
 
     public double getPerc() {return super.getPerc();}
 
-    public void makePerc(){
-        super.makePerc();
-    }
+    //public void makePerc(){
+    //    super.makePerc();
+    //}
 }

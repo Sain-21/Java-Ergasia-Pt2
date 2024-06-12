@@ -1,9 +1,6 @@
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class functions {
 
@@ -61,106 +58,22 @@ public class functions {
         return x;
     }
 
-    public static void readRatedPersons(String filename) {
-            try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    // Επεξεργασία της γραμμής
-                    if (line.trim().equalsIgnoreCase("{")) {
-                        RatedPerson person = new RatedPerson();
-                        while (!(line = br.readLine().trim()).equalsIgnoreCase("}")) {
-                            if (line.toUpperCase().startsWith("CODE")) {
-                                person.setCode(line.split("\\s+")[1]);
-                            } else if (line.toUpperCase().startsWith("SURNAME")) {
-                                person.setSurname(line.split("\\s+")[1].replace("\"", ""));
-                            } else if (line.toUpperCase().startsWith("FIRSTNAME")) {
-                                person.setFirstname(line.split("\\s+")[1].replace("\"", ""));
-                            }
-                        }
-                        ratedPersons.add(person);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    
-    public static void readQuestions(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.trim().equalsIgnoreCase("{")) {
-                    Question question = new Question();
-                    while (!(line = br.readLine().trim()).equalsIgnoreCase("}")) {
-                        if (line.toUpperCase().startsWith("TYPE")) {
-                            question.setType(line.split("\\s+")[1]);
-                        } else if (line.toUpperCase().startsWith("CODE")) {
-                            question.setCode(line.split("\\s+")[1]);
-                        } else if (line.toUpperCase().startsWith("DECSR")) {
-                            question.setDescr(line.split("\\s+", 2)[1].replace("\"", ""));
-                        } // Προσθέστε την επεξεργασία των υπόλοιπων χαρακτηριστικών
-                    }
-                    questions.add(question);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    static void readRatedPersonFile(String filename)
+    {
+        try{
+            File fileObj = new File(filename);
+            Scanner reader = new Scanner(fileObj);
 
-    public static void readAnswers(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.trim().equalsIgnoreCase("{")) {
-                    Answer answer = new Answer();
-                    while (!(line = br.readLine().trim()).equalsIgnoreCase("}")) {
-                        if (line.toUpperCase().startsWith("TYPE")) {
-                            answer.setType(line.split("\\s+")[1]);
-                        } else if (line.toUpperCase().startsWith("RATEDPERSON_CODE")) {
-                            answer.setRatedPersonCode(line.split("\\s+")[1]);
-                        } else if (line.toUpperCase().startsWith("QUESTION_CODE")) {
-                            answer.setQuestionCode(line.split("\\s+")[1]);
-                        } // Προσθέστε την επεξεργασία των υπόλοιπων χαρακτηριστικών
-                    }
-                    answers.add(answer);
-                }
+            while(reader.hasNextLine())
+            {
+                String data = reader.nextLine();
+                System.out.println(data);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            reader.close();
         }
-    }
-
-    public static void writeQuestions(String filename) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            bw.write("QUESTION_LIST\n{\n");
-            for (Question q : questions) {
-                bw.write("   QUESTION\n   {\n");
-                bw.write("      TYPE " + q.getType() + "\n");
-                bw.write("      CODE " + q.getCode() + "\n");
-                bw.write("      DECSR \"" + q.getDescr() + "\"\n");
-                // Προσθέστε την εγγραφή των υπόλοιπων χαρακτηριστικών
-                bw.write("   }\n");
-            }
-            bw.write("}\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void writeAnswers(String filename) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            bw.write("ANSWER_LIST\n{\n");
-            for (Answer a : answers) {
-                bw.write("   ANSWER\n   {\n");
-                bw.write("      TYPE " + a.getType() + "\n");
-                bw.write("      RATEDPERSON_CODE " + a.getRatedPersonCode() + "\n");
-                bw.write("      QUESTION_CODE " + a.getQuestionCode() + "\n");
-                // Προσθέστε την εγγραφή των υπόλοιπων χαρακτηριστικών
-                bw.write("   }\n");
-            }
-            bw.write("}\n");
-        } catch (IOException e) {
+        catch(FileNotFoundException e)
+        {
+            System.out.println("[X] Ypirkse kapoio provlima kata tin anagnosi tou fakelou");
             e.printStackTrace();
         }
     }

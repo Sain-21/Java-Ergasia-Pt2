@@ -1,5 +1,3 @@
-import java.util.*;
-
 class aksiologoumenos {
     private int code;
     private String name;

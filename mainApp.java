@@ -1,25 +1,18 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 class mainApp{
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         ArrayList<aksiologoumenos> aksiologoumenoi = new ArrayList<aksiologoumenos>();
         ArrayList<erotiseis> questionList = new ArrayList<erotiseis>();
         ArrayList<apantiseis> answerList = new ArrayList<apantiseis>();
 
+        functions.readRatedPersonFile("ratedperson_list.txt");
+
+
         Scanner input = new Scanner(System.in);
         int choice = 0;
         functions.clear_console();
-
-        functions.readRatedPersons("ratedPersons.txt");
-        functions.readQuestions("questions.txt");
-        functions.readAnswers("answers.txt");
-
 
         System.out.println("                                          __ ");
         System.out.println("            _ _ _     _                  |  |");
@@ -821,12 +814,5 @@ class mainApp{
                 break;
             }
         }
-        // Εκτέλεση του προγράμματος (π.χ. προσθήκη νέων ερωτήσεων, απαντήσεων, κλπ.)
-
-        // Κατά την έξοδο ή κατ' επιλογή του χρήστη
-        functions.writeQuestions("questions.txt");
-        functions.writeAnswers("answers.txt");
     }
-
-    
 }
