@@ -1,14 +1,13 @@
+import java.io.IOException;
 import java.util.*;
 
+
 class mainApp{
-    public static void main(String[] args) throws InterruptedException
+    public static void main(String[] args) throws InterruptedException, IOException
     {
-        ArrayList<aksiologoumenos> aksiologoumenoi = new ArrayList<aksiologoumenos>();
+        ArrayList<aksiologoumenos> aksiologoumenoi = functions.readRatedPersons("ratedperson_list.txt");
         ArrayList<erotiseis> questionList = new ArrayList<erotiseis>();
         ArrayList<apantiseis> answerList = new ArrayList<apantiseis>();
-
-        functions.readRatedPersonFile("ratedperson_list.txt");
-
 
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -35,7 +34,7 @@ class mainApp{
                 System.out.print("[X] To Menu Dexete Mono Arithmous Ws Epipilogi!");
                 functions.await();
                 functions.clear_console();
-                choice = 1000;
+                choice = -1;
             }
 
             switch (choice) {

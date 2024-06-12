@@ -1,6 +1,5 @@
 import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 public class functions {
 
@@ -58,23 +57,54 @@ public class functions {
         return x;
     }
 
-    static void readRatedPersonFile(String filename)
+    public static ArrayList<aksiologoumenos> readRatedPersons(String filename) throws IOException 
     {
-        try{
-            File fileObj = new File(filename);
-            Scanner reader = new Scanner(fileObj);
-
-            while(reader.hasNextLine())
-            {
-                String data = reader.nextLine();
-                System.out.println(data);
-            }
-            reader.close();
-        }
-        catch(FileNotFoundException e)
+        ArrayList<aksiologoumenos> ratedPersons = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String line;
+        while ((line = reader.readLine()) != null) 
         {
-            System.out.println("[X] Ypirkse kapoio provlima kata tin anagnosi tou fakelou");
-            e.printStackTrace();
+            line = line.trim();
+            if (line.equals("{")) 
+            {
+                String code = null, name = null, surname = null;
+                
+                while (!(line = reader.readLine().trim()).equals("}")) 
+                {
+                    String[] parts = line.split("\\s+", 2);
+                    if (parts.length == 2)
+                    {
+                        String tag = parts[0].toUpperCase();
+                        String value = parts[1].replaceAll("\"", "");
+                        switch (tag) 
+                        {
+                            case "CODE":
+                                code = value;
+                                break;
+                            case "NAME":
+                                name = value;
+                                break;
+                            case "SURNAME":
+                                surname = value;
+                                break;
+                            default:
+                                continue;
+                        }
+                    }
+                }
+                if (code != null && name != null && surname != null) {
+                    ratedPersons.add(new aksiologoumenos(Integer.parseInt(code), name, surname));
+                }
+            }
         }
+        reader.close();
+        return ratedPersons;
     }
+
+    //readquestions
+    //readanswers
+    
+    //write aksiologoumenoi
+    //write questions
+    //write answers
 }

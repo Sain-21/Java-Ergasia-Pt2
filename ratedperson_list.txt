@@ -3,13 +3,14 @@ RATEDPERSON_LIST
  	RATEDPERSON
  	{
  		CODE 1001
- 		SURNAME “Κώστας”
- 		FIRSTNAME “Παπαδόπουλος”
+ 		NAME "Xristos"
+		SURNAME "Koutsikas"
+ 		
  	}
  	RATEDPERSON
  	{
  		CODE 1002
- 		SURNAME “Μαρία”
- 		FIRSTNAME “Αντωνίου”
+ 		NAME "Stauros"
+ 		SURNAME "Toumpis"
  	}
 }
