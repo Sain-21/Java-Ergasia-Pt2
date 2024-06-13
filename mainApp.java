@@ -7,7 +7,7 @@ class mainApp{
     {
         ArrayList<aksiologoumenos> aksiologoumenoi = functions.readRatedPersons("ratedperson_list.txt");
         ArrayList<erotiseis> questionList = functions.readQuestionList("question_list.txt");
-        ArrayList<apantiseis> answerList = new ArrayList<apantiseis>();
+        ArrayList<apantiseis> answerList = functions.readAnswers("answer_list.txt", aksiologoumenoi, questionList);
 
         Scanner input = new Scanner(System.in);
         int choice = 0;

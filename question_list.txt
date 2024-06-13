@@ -3,7 +3,7 @@ QUESTION_LIST
  	QUESTION
  	{
  		TYPE MC
- 		CODE 1002
+ 		CODE 2001
  		DECSR "Poia ekfrasi einai megaliteri apo 100?"
  		ANSWERS "105,90+11,110-11,50+51"
  		RIGHT_ANSWERS "90+11"
@@ -19,8 +19,8 @@ QUESTION_LIST
  	QUESTION
  	{
  		TYPE FILL
- 		CODE 3001
- 		DECSR "To athrisma twn arithmwn ? kai ? einai ? ."
- 		ANSWERS "10,20,30"
+ 		CODE 2003
+ 		DECSR "O ? pagkosmios polemos jekinhse to ? kai teleiwse to ? ."
+ 		ANSWERS "1940,1944"
  	}
 }

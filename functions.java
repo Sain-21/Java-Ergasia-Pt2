@@ -229,7 +229,63 @@ public class functions {
     }
 
     //readanswers
-    
+    public static ArrayList<apantiseis> readAnswers(String filename,ArrayList<aksiologoumenos> aksiologoumenoi,ArrayList<erotiseis> questionList) throws IOException{
+
+        ArrayList<apantiseis> readAnswers = new ArrayList<apantiseis>();
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String line;
+
+        while ((line = reader.readLine()) != null) 
+        {
+            line = line.trim();
+            if (line.equals("{")) 
+            {
+                String studCode = null, quesCode = null;
+                ArrayList<String> ansList = new ArrayList<String>();
+                aksiologoumenos stud;
+                erotiseis ques;
+                String[] given;
+
+                while (!(line = reader.readLine().trim()).equals("}")) 
+                {
+                    String[] parts = line.split("\\s+", 2);
+                    if (parts.length == 2)
+                    {
+                        String tag = parts[0].toUpperCase();
+                        String value = parts[1].replaceAll("\"", "");
+                        
+                        switch (tag) 
+                        {
+                            case "RATEDPERSON_CODE":
+                                for(aksiologoumenos item : aksiologoumenoi){
+                                    if(item.getCode() == Integer.parseInt(value)){
+                                        stud=item;
+                                    }
+                                }
+                                break;
+
+                            case "QUES_CODE":
+                                for(erotiseis item : questionList){
+                                    if(item.getCode() == Integer.parseInt(value)){
+                                        ques=item;
+                                    }
+                                }
+                                break;
+                            case "GIVEN":
+                                int len=Arrays.asList(value.split(",")).size();
+                                given=new String[len];
+                                break;
+                            default:
+                                continue;
+                        }
+                    }
+                }
+
+        
+            }
+        }
+        return readAnswers;
+    }
     //write aksiologoumenoi
     //write questions
     //write answers
