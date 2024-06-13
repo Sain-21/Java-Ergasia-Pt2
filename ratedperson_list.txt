@@ -1,16 +1,21 @@
-RATEDPERSON_LIST
+RATED_PERSON_LIST
 {
- 	RATEDPERSON
- 	{
- 		CODE 1001
- 		NAME "Xristos"
-		SURNAME "Koutsikas"
- 		
- 	}
- 	RATEDPERSON
- 	{
- 		CODE 1002
- 		NAME "Stauros"
- 		SURNAME "Toumpis"
- 	}
+   RATED_PERSON
+   {
+      CODE 1001
+      NAME Xristos
+      SURNAME Koutsikas
+   }
+   RATED_PERSON
+   {
+      CODE 1002
+      NAME Stauros
+      SURNAME Toumpis
+   }
+   RATED_PERSON
+   {
+      CODE 1003
+      NAME Aggelos
+      SURNAME Koffinaj
+   }
 }

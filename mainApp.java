@@ -1,10 +1,11 @@
 import java.io.IOException;
 import java.util.*;
 
-
 class mainApp{
     public static void main(String[] args) throws InterruptedException, IOException
     {
+        functions.clear_console();
+
         ArrayList<aksiologoumenos> aksiologoumenoi = functions.readRatedPersons("ratedperson_list.txt");
         ArrayList<erotiseis> questionList = functions.readQuestionList("question_list.txt");
         ArrayList<apantiseis> answerList = functions.readAnswers("answer_list.txt", aksiologoumenoi, questionList);
@@ -646,6 +647,7 @@ class mainApp{
                     break;
 
                 case 6:
+                    functions.clear_console();
                     ArrayList<aksiologoumenos> copyAks=new ArrayList();
 
                     for(aksiologoumenos item:aksiologoumenoi){
@@ -804,6 +806,20 @@ class mainApp{
                     functions.clear_console();
                     break;
             }
+
+            try 
+            {
+                functions.writeRatedPersons(aksiologoumenoi, "ratedperson_list.txt");
+                functions.writeQuestions(questionList, "question_list.txt");
+                functions.writeAnswers(answerList, "answer_list.txt");
+            }
+            catch(IOException e)
+            {
+                System.out.println("[X] H eggrafi twn arxeiwn apetixe!");
+                System.out.println("[X] Provlimata: \n");
+                e.printStackTrace();
+            }
+            
 
             if(choice == 0)
             {

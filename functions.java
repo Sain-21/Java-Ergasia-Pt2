@@ -53,48 +53,67 @@ public class functions {
     public static ArrayList<aksiologoumenos> readRatedPersons(String filename) throws IOException 
     {
         ArrayList<aksiologoumenos> ratedPersons = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
-        String line;
-        while ((line = reader.readLine()) != null) 
-        {
-            line = line.trim();
-            if (line.equals("{")) 
+        Scanner input = new Scanner(System.in);
+
+        try
+        {   
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String line;
+            while ((line = reader.readLine()) != null) 
             {
-                String code = null, name = null, surname = null;
-                
-                while (!(line = reader.readLine().trim()).equals("}")) 
+                line = line.trim();
+                if (line.equals("{")) 
                 {
-                    String[] parts = line.split("\\s+", 2);
-                    if (parts.length == 2)
+                    String code = null, name = null, surname = null;
+
+                    while (!(line = reader.readLine().trim()).equals("}")) 
                     {
-                        String tag = parts[0].toUpperCase();
-                        String value = parts[1].replaceAll("\"", "");
-                        switch (tag) 
+                        String[] parts = line.split("\\s+", 2);
+                        if (parts.length == 2)
                         {
-                            case "CODE":
-                                code = value;
-                                break;
-                            case "NAME":
-                                name = value;
-                                break;
-                            case "SURNAME":
-                                surname = value;
-                                break;
-                            default:
-                                continue;
+                            String tag = parts[0].toUpperCase();
+                            String value = parts[1].replaceAll("\"", "");
+                            switch (tag) 
+                            {
+                                case "CODE":
+                                    code = value;
+                                    break;
+                                case "NAME":
+                                    name = value;
+                                    break;
+                                case "SURNAME":
+                                    surname = value;
+                                    break;
+                                default:
+                                    continue;
+                            }
                         }
                     }
-                }
-                if (code != null && name != null && surname != null) {
-                    ratedPersons.add(new aksiologoumenos(Integer.parseInt(code), name, surname));
-                }
-                else{
-
+                    if (code != null && name != null && surname != null) 
+                    {
+                        ratedPersons.add(new aksiologoumenos(Integer.parseInt(code), name, surname));
+                    }
+                    else
+                    {
+                        System.out.println("[!] Ypirkse Provlima Me Tin Anagnosi Enos Aksiologoumenou!");
+                        System.out.println("[!] Parakalw Elenkste To Arxeio: " + filename);
+                        System.out.println("[!] To Programa Tha Sinexisei Tin Leipourgeia Tou Kanonika, Patiste Otidipote Gia Tin Sinexeia.");
+                        input.nextLine();
+                        continue;
+                    }
                 }
             }
+            reader.close();
+            return ratedPersons;
         }
-        reader.close();
-        return ratedPersons;
+        catch(IOException e)
+        {
+            System.out.println("[X] Ypirkse Provlima Stin Anagnosi tou arxeiou: " + filename);
+            System.out.println("[X] Perisoteres Plirofories Sxetika Me To Thema: \n");
+            e.printStackTrace();
+            System. exit(0);
+            return null;
+        }
     }
 
     //readquestions
@@ -181,7 +200,7 @@ public class functions {
                     }
                 }
 
-                if(typeEnum.equals("WORD"))
+                else if(typeEnum.equals("WORD"))
                 {
                     String[] ansListHolder = new String[ansList.size()];
                     String[] rightAnsListHolder = new String[rightAnsList.size()];
@@ -202,7 +221,7 @@ public class functions {
                     }
                 }
 
-                if(typeEnum.equals("FILL"))
+                else if(typeEnum.equals("FILL"))
                 {
                     String[] ansListHolder = new String[ansList.size()];
                     String[] rightAnsListHolder = new String[rightAnsList.size()];
@@ -240,11 +259,9 @@ public class functions {
             line = line.trim();
             if (line.equals("{")) 
             {
-                String studCode = null, quesCode = null;
-                ArrayList<String> ansList = new ArrayList<String>();
-                aksiologoumenos stud;
-                erotiseis ques;
-                String[] given;
+                ArrayList<String> given = new ArrayList<String>();
+                aksiologoumenos stud = null;
+                erotiseis ques = null;
 
                 while (!(line = reader.readLine().trim()).equals("}")) 
                 {
@@ -272,8 +289,7 @@ public class functions {
                                 }
                                 break;
                             case "GIVEN":
-                                int len=Arrays.asList(value.split(",")).size();
-                                given=new String[len];
+                                given.addAll(Arrays.asList(value.split(",")));
                                 break;
                             default:
                                 continue;
@@ -281,12 +297,159 @@ public class functions {
                     }
                 }
 
-        
+                if (ques instanceof er_kena)
+                {
+                    String[] givenListHolder = new String[given.size()];
+
+                    if(stud != null && ques != null && given != null)
+                    {
+                        for(int i = 0; i < given.size(); i++)
+                        {
+                            givenListHolder[i] = given.get(i);
+                        }
+
+                        readAnswers.add(new ap_kena(stud, ques, givenListHolder));
+                    }
+                }
+
+                if (ques instanceof er_oneWord)
+                {
+                    String[] givenListHolder = new String[given.size()];
+
+                    if(stud != null && ques != null && given != null)
+                    {
+                        for(int i = 0; i < given.size(); i++)
+                        {
+                            givenListHolder[i] = given.get(i);
+                        }
+
+                        readAnswers.add(new ap_oneWord(stud, ques, givenListHolder));
+                    }
+                }
+
+                if (ques instanceof er_multChoice)
+                {
+                    String[] givenListHolder = new String[given.size()];
+
+                    if(stud != null && ques != null && given != null)
+                    {
+                        for(int i = 0; i < given.size(); i++)
+                        {
+                            givenListHolder[i] = given.get(i);
+                        }
+
+                        readAnswers.add(new ap_multiChoice(stud, ques, givenListHolder));
+                    }
+                }
             }
         }
+        reader.close();
         return readAnswers;
     }
+    
     //write aksiologoumenoi
+    public static void writeRatedPersons(ArrayList<aksiologoumenos> ratedPersons, String filename) throws IOException 
+    {
+        if (ratedPersons.isEmpty()) {
+            System.out.println("The ratedPersons list is empty!");
+        }
+
+        else
+        {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+            writer.write("RATED_PERSON_LIST\n{\n");
+            for (aksiologoumenos item : ratedPersons)
+            {
+                writer.write("   RATED_PERSON\n   {\n");
+                writer.write("      CODE " + item.getCode() + "\n");
+                writer.write("      NAME " + item.getName() + "\n");
+                writer.write("      SURNAME " + item.getSurname() + "\n");
+                writer.write("   }\n");
+            }
+            writer.write("}\n");
+            writer.close();
+        }
+    }
+    
     //write questions
+    public static void writeQuestions(ArrayList<erotiseis> questions, String filename) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+        writer.write("QUESTION_LIST\n{\n");
+
+        for (erotiseis item : questions) {
+            String replacement= "";
+            if(item instanceof er_multChoice)
+            {
+                writer.write("    QUESTION\n    {\n");
+                writer.write("        TYPE MC\n");
+                writer.write("        CODE " + item.getCode() + "\n");
+                writer.write("        DECSR \"" + item.getEkfonisi() + "\"\n");
+
+                replacement = "\"" + String.join(",", item.getAnswer()) + "\"";
+                writer.write("        ANSWERS " + replacement + "\n");
+
+                replacement = "\"" + String.join(",", item.getRightAnswers()) + "\"";
+                writer.write("        RIGHT_ANSWERS " + replacement + "\n");
+                writer.write("    }\n");
+            }
+            
+            if(item instanceof er_kena)
+            {
+                writer.write("    QUESTION\n    {\n");
+                writer.write("        TYPE FILL\n");
+                writer.write("        CODE " + item.getCode() + "\n");
+                writer.write("        DECSR \"" + item.getEkfonisi() + "\"\n");
+
+                replacement = "\"" + String.join(",", item.getAnswer()) + "\"";
+                writer.write("        ANSWERS " + replacement + "\n");
+                writer.write("    }\n");
+            }
+
+            if(item instanceof er_oneWord)
+            {
+                writer.write("    QUESTION\n    {\n");
+                writer.write("        TYPE WORD\n");
+                writer.write("        CODE " + item.getCode() + "\n");
+                writer.write("        DECSR \"" + item.getEkfonisi() + "\"\n");
+
+                replacement = "\"" + String.join(",", item.getAnswer()) + "\"";
+                writer.write("        ANSWERS " + replacement + "\n");
+
+                replacement = "\"" + String.join(",", item.getRightAnswers()) + "\"";
+                writer.write("        RIGHT_ANSWERS " + replacement + "\n");
+                writer.write("    }\n");
+            }
+        }
+        writer.write("}\n");
+        writer.close();
+    }
+
     //write answers
+    public static void writeAnswers(ArrayList<apantiseis> answerList, String filename) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+        writer.write("ANSWER_LIST\n{\n");
+
+        for (apantiseis item : answerList) {
+            String replacement= "";
+
+            writer.write("    ANSWER\n    {\n");
+            writer.write("        RATEDPERSON_CODE " + item.getStudent().getCode() + "\n");
+            writer.write("        QUES_CODE " + item.getErot().getCode() + "\n");
+
+            replacement = "\"" + String.join(",", item.getListaAp()) + "\"";
+            writer.write("        GIVEN " + replacement + "\n");
+
+            writer.write("    }\n"); 
+        }
+        writer.write("}\n");
+        writer.close();
+    }
 }
+
+/*
+ * EXCEPIONS HANDLES GIA:
+ *    readquestionlist
+ *    readanswerlist
+ *
+ * 
+ */

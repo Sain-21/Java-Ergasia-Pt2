@@ -1,26 +1,34 @@
 QUESTION_LIST
 {
- 	QUESTION
- 	{
- 		TYPE MC
- 		CODE 2001
- 		DECSR "Poia ekfrasi einai megaliteri apo 100?"
- 		ANSWERS "105,90+11,110-11,50+51"
- 		RIGHT_ANSWERS "90+11"
- 	}
- 	QUESTION
- 	{
- 		TYPE WORD
- 		CODE 2002
- 		DECSR "Poso kanei 37+37;"
- 		ANSWERS "54"
- 		RIGHT_ANSWERS "54"
- 	}
- 	QUESTION
- 	{
- 		TYPE FILL
- 		CODE 2003
- 		DECSR "O ? pagkosmios polemos jekinhse to ? kai teleiwse to ? ."
- 		ANSWERS "1940,1944"
- 	}
+    QUESTION
+    {
+        TYPE MC
+        CODE 2001
+        DECSR "Poia ekfrasi einai megaliteri apo 100?"
+        ANSWERS "105,90+11,110-11,50+51"
+        RIGHT_ANSWERS "90+11,105,50+51"
+    }
+    QUESTION
+    {
+        TYPE WORD
+        CODE 2002
+        DECSR "Poso kanei 37+37;"
+        ANSWERS "54"
+        RIGHT_ANSWERS "54"
+    }
+    QUESTION
+    {
+        TYPE FILL
+        CODE 2003
+        DECSR "O 2os pagkosmios polemos jekinhse to ? kai teleiwse to ? ."
+        ANSWERS "1940,1944"
+    }
+    QUESTION
+    {
+        TYPE MC
+        CODE 1234
+        DECSR "Ti troei o koff oli mera?"
+        ANSWERS "poutsa,skata"
+        RIGHT_ANSWERS "poutsa"
+    }
 }
