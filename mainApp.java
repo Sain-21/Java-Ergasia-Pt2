@@ -6,7 +6,7 @@ class mainApp{
     public static void main(String[] args) throws InterruptedException, IOException
     {
         ArrayList<aksiologoumenos> aksiologoumenoi = functions.readRatedPersons("ratedperson_list.txt");
-        ArrayList<erotiseis> questionList = new ArrayList<erotiseis>();
+        ArrayList<erotiseis> questionList = functions.readQuestionList("question_list.txt");
         ArrayList<apantiseis> answerList = new ArrayList<apantiseis>();
 
         Scanner input = new Scanner(System.in);

@@ -32,14 +32,6 @@ public class functions {
         }
     }
 
-    public ArrayList conv(String[] lista){
-        ArrayList newList=new ArrayList();
-        for(int i=0; i<lista.length; i++){
-            newList.add(lista[i]);
-        }
-        return newList;
-    }
-
     static boolean search(String[] list1, String[] list2){
         boolean x=false;
         int a=0;
@@ -57,6 +49,7 @@ public class functions {
         return x;
     }
 
+    //read rated persons
     public static ArrayList<aksiologoumenos> readRatedPersons(String filename) throws IOException 
     {
         ArrayList<aksiologoumenos> ratedPersons = new ArrayList<>();
@@ -95,6 +88,9 @@ public class functions {
                 if (code != null && name != null && surname != null) {
                     ratedPersons.add(new aksiologoumenos(Integer.parseInt(code), name, surname));
                 }
+                else{
+
+                }
             }
         }
         reader.close();
@@ -102,6 +98,136 @@ public class functions {
     }
 
     //readquestions
+    public static ArrayList<erotiseis> readQuestionList(String filename) throws IOException
+    {
+        ArrayList<erotiseis> readQuestions = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String line;
+
+        while ((line = reader.readLine()) != null) 
+        {
+            line = line.trim();
+            if (line.equals("{")) 
+            {
+                String code = null, description = null;
+                ArrayList<String> ansList = new ArrayList<String>();
+                ArrayList<String> rightAnsList = new ArrayList<String>();
+                String typeEnum = "";
+
+                while (!(line = reader.readLine().trim()).equals("}")) 
+                {
+                    String[] parts = line.split("\\s+", 2);
+                    if (parts.length == 2)
+                    {
+                        String tag = parts[0].toUpperCase();
+                        String value = parts[1].replaceAll("\"", "");
+                        
+                        switch (tag) 
+                        {
+                            case "TYPE":
+                                if(value.equals("MC"))
+                                {
+                                    typeEnum = value;
+                                }
+
+                                if(value.equals("WORD"))
+                                {
+                                    typeEnum = value;
+                                }
+
+                                if(value.equals("FILL"))
+                                {
+                                    typeEnum = value;
+                                }
+                                break;
+
+                            case "CODE":
+                                code = value;
+                                break;
+                            case "DECSR":
+                                description = value;
+                                break;
+                            case "ANSWERS":
+                                ansList.addAll(Arrays.asList(value.split(",")));
+                                break;
+                                
+                            case "RIGHT_ANSWERS":
+                                rightAnsList.addAll(Arrays.asList(value.split(",")));
+                                break;
+                            
+                            default:
+                                continue;
+                        }
+                    }
+                }
+
+                if(typeEnum.equals("MC"))
+                {
+                    String[] ansListHolder = new String[ansList.size()];
+                    String[] rightAnsListHolder = new String[rightAnsList.size()];
+
+                    if(code != null && description != null && ansList != null && rightAnsList != null){
+                        for(int i = 0; i < ansList.size(); i++)
+                        {
+                            ansListHolder[i] = ansList.get(i);
+                        }
+
+                        for(int i = 0; i < rightAnsList.size(); i++)
+                        {
+                            rightAnsListHolder[i] = rightAnsList.get(i);
+                        }
+
+                        readQuestions.add(new er_multChoice(Integer.parseInt(code), description, ansListHolder, rightAnsListHolder)) ;
+                    }
+                }
+
+                if(typeEnum.equals("WORD"))
+                {
+                    String[] ansListHolder = new String[ansList.size()];
+                    String[] rightAnsListHolder = new String[rightAnsList.size()];
+
+                    if(code != null && description != null && ansList != null && rightAnsList != null)
+                    {
+                        for(int i = 0; i < ansList.size(); i++)
+                        {
+                            ansListHolder[i] = ansList.get(i);
+                        }
+
+                        for(int i = 0; i < rightAnsList.size(); i++)
+                        {
+                            rightAnsListHolder[i] = rightAnsList.get(i);
+                        }
+
+                        readQuestions.add(new er_oneWord(Integer.parseInt(code), description, ansListHolder, rightAnsListHolder)) ;
+                    }
+                }
+
+                if(typeEnum.equals("FILL"))
+                {
+                    String[] ansListHolder = new String[ansList.size()];
+                    String[] rightAnsListHolder = new String[rightAnsList.size()];
+
+                    if(code != null && description != null && ansList != null)
+                    {
+                        for(int i = 0; i < ansList.size(); i++)
+                        {
+                            ansListHolder[i] = ansList.get(i);
+                        }
+
+                        for(int i = 0; i < rightAnsList.size(); i++)
+                        {
+                            rightAnsListHolder[i] = rightAnsList.get(i);
+                        }
+
+                        readQuestions.add(new er_kena(Integer.parseInt(code), description, ansListHolder,ansListHolder));
+                    }
+                }
+            }
+        }
+        reader.close();
+        return readQuestions;
+    }
+
     //readanswers
     
     //write aksiologoumenoi

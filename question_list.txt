@@ -4,24 +4,23 @@ QUESTION_LIST
  	{
  		TYPE MC
  		CODE 1002
- 		DECSR “Ποια έκφραση είναι μεγαλύτερη από 100;”
- 		ANSWERS “105,90+11,110-11,50+51”
- 		...
+ 		DECSR "Poia ekfrasi einai megaliteri apo 100?"
+ 		ANSWERS "105,90+11,110-11,50+51"
+ 		RIGHT_ANSWERS "90+11"
  	}
  	QUESTION
  	{
  		TYPE WORD
  		CODE 2002
- 		DECSR “Πόσο κάνει 37+37;”
- 		WORD “54”
- 		...
+ 		DECSR "Poso kanei 37+37;"
+ 		ANSWERS "54"
+ 		RIGHT_ANSWERS "54"
  	}
  	QUESTION
  	{
  		TYPE FILL
  		CODE 3001
- 		DECSR “Το άθροισμα των αριθμών ? και ? είναι ?.”
- 		...
+ 		DECSR "To athrisma twn arithmwn ? kai ? einai ? ."
+ 		ANSWERS "10,20,30"
  	}
- 	...
 }
