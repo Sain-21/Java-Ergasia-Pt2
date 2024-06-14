@@ -23,12 +23,4 @@ QUESTION_LIST
         DECSR "O 2os pagkosmios polemos jekinhse to ? kai teleiwse to ? ."
         ANSWERS "1940,1944"
     }
-    QUESTION
-    {
-        TYPE MC
-        CODE 1234
-        DECSR "Ti troei o koff oli mera?"
-        ANSWERS "poutsa,skata"
-        RIGHT_ANSWERS "poutsa"
-    }
 }
