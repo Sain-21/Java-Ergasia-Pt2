@@ -604,43 +604,51 @@ class mainApp{
                             System.out.println(item.toString());
                         }
 
+                        System.out.println("\nEpeleje Ajiologoumeno Plhktrologontas Ton Kwdiko Toy");
                         System.out.print("> ");
-                        code = Integer.parseInt(input.nextLine());
-    
-                        for(aksiologoumenos items : aksiologoumenoi){   
-                            if(items.getCode() == code){
-                                System.out.println("\n"+items.toString());
-                                found = true;
-                                for(apantiseis item : answerList)
-                                {
-                                    if(item.getStudent() == items)
+                        try{
+                            code = Integer.parseInt(input.nextLine());
+                        
+                            for(aksiologoumenos items : aksiologoumenoi){   
+                                if(items.getCode() == code){
+                                    System.out.println("\n"+items.toString());
+                                    found = true;
+                                    for(apantiseis item : answerList)
                                     {
-                                        System.out.println("[*] Erotisi: " + item.getErot().getEkfonisi() + "| Apantisi: " + Arrays.toString(item.getListaAp()));
+                                        if(item.getStudent() == items)
+                                        {
+                                            System.out.println("[*] Erotisi: " + item.getErot().getEkfonisi() + "| Apantisi: " + Arrays.toString(item.getListaAp()));
+                                        }
                                     }
                                 }
                             }
-                        }
-                        
-                        if(!found)
-                        {
-                            System.out.print("[!] O Aksiologoumenos Den Uparxei Sth Lista, Prospathise Jana!");
-                            functions.await();
-                            break;
-                        }
-                        
-                        System.out.println("[!] Gia Epistofi Sto Main Menu Pata 0, Pata Otidipote Allo Gia Epaneisagogi Aksiologoumenou");
-                        System.out.print("> ");
-                        String epilogi = input.nextLine();
 
-                        if(epilogi.equals("0"))
-                        {
-                            System.out.print("[!] Epistrofi sto menu");
-                            functions.await();
-                            break;
+                            if(!found)
+                            {
+                                System.out.print("[!] O Aksiologoumenos Den Uparxei Sth Lista, Prospathise Jana!");
+                                functions.await();
+                                break;
+                            }
+
+                            System.out.println("[!] Gia Epistofi Sto Main Menu Pata 0, Pata Otidipote Allo Gia Epaneisagogi Aksiologoumenou");
+                            System.out.print("> ");
+                            String epilogi = input.nextLine();
+
+                            if(epilogi.equals("0"))
+                            {
+                                System.out.print("[!] Epistrofi sto menu");
+                                functions.await();
+                                break;
+                            }
+                            else{
+                                functions.clear_console();
+                                continue;
+                            }
                         }
-                        else{
+                        catch(Exception e){
+                            System.err.print("[X] " + e + "!");
+                            functions.await();
                             functions.clear_console();
-                            continue;
                         }
                     }
                     functions.clear_console();
@@ -667,7 +675,7 @@ class mainApp{
                         copyAks.remove(max);
                         a--;
                     }
-                    System.out.println("[!] Pathse Otidhpote Gia Epistrofi Sto Menu");
+                    System.out.println("\n[!] Pathse Otidhpote Gia Epistrofi Sto Menu");
                     System.out.print("> ");
                     input.nextLine();
                     System.out.print("Epistrofi Sto Menu");

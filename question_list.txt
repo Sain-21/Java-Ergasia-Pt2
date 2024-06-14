@@ -31,4 +31,12 @@ QUESTION_LIST
         ANSWERS "poutsa,skata"
         RIGHT_ANSWERS "poutsa"
     }
+    QUESTION
+    {
+        TYPE MC
+        CODE 2007
+        DECSR "ti einai o lalaj?"
+        ANSWERS "ntrosxo,xesasmpou,oreos,kalos"
+        RIGHT_ANSWERS "oreos,xesasmpou"
+    }
 }

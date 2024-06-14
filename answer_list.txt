@@ -18,4 +18,22 @@ ANSWER_LIST
         QUES_CODE 2003
         GIVEN "1944,1940"
     }
+    ANSWER
+    {
+        RATEDPERSON_CODE 3230016
+        QUES_CODE 1234
+        GIVEN "poutsa,skata"
+    }
+    ANSWER
+    {
+        RATEDPERSON_CODE 1001
+        QUES_CODE 2007
+        GIVEN "xesasmpou"
+    }
+    ANSWER
+    {
+        RATEDPERSON_CODE 3230098
+        QUES_CODE 2007
+        GIVEN "oreos,kalos"
+    }
 }
