@@ -18,4 +18,16 @@ RATED_PERSON_LIST
       NAME Aggelos
       SURNAME Koffinaj
    }
+   RATED_PERSON
+   {
+      CODE 3230016
+      NAME logo
+      SURNAME vasi
+   }
+   RATED_PERSON
+   {
+      CODE 3230098
+      NAME marios
+      SURNAME lalaj
+   }
 }
