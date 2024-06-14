@@ -12,22 +12,4 @@ RATED_PERSON_LIST
       NAME Stauros
       SURNAME Toumpis
    }
-   RATED_PERSON
-   {
-      CODE 1003
-      NAME Aggelos
-      SURNAME Koffinaj
-   }
-   RATED_PERSON
-   {
-      CODE 3230016
-      NAME logo
-      SURNAME vasi
-   }
-   RATED_PERSON
-   {
-      CODE 3230098
-      NAME marios
-      SURNAME lalaj
-   }
 }
