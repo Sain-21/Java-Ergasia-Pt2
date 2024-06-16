@@ -445,11 +445,3 @@ public class functions {
         writer.close();
     }
 }
-
-/*
- * EXCEPIONS HANDLES GIA:
- *    readquestionlist
- *    readanswerlist
- *
- * 
- */
