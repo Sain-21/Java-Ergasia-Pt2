@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.*;
+import java.text.DecimalFormat;
 
 class mainApp{
     public static void main(String[] args) throws InterruptedException, IOException
@@ -394,6 +395,8 @@ class mainApp{
                     while(true){
                         functions.clear_console();
 
+                        System.out.println("                   -Eisagogh Apantisewn-\n");
+
                         boolean foundAksiolog=false;
                         System.out.println("Aksiologoumenoi:");
                         for(aksiologoumenos item: aksiologoumenoi){
@@ -562,8 +565,11 @@ class mainApp{
                                 System.out.println("[!] O Aksiologoumenos Den Uparxei Sth Lista, Prospathise Jana!");
                                 System.out.println("[!] Dwse 0 Gia Epistrofi Sto Menu H Otidhpote Allo Gia Nea Prospatheia");
                                 System.out.print("> ");
-                                if(input.nextLine().equals("0")){break;}
-                                functions.clear_console();
+                                if(input.nextLine().equals("0"))
+                                {
+                                    functions.clear_console();
+                                    break;
+                                }
                             }
                         }
                         catch(Exception e)
@@ -656,6 +662,9 @@ class mainApp{
 
                 case 6:
                     functions.clear_console();
+
+                    System.out.println("               -Emfanisi Plithous Swstwn Apantisewn Ana Aksiologoumenou-\n");
+
                     ArrayList<aksiologoumenos> copyAks=new ArrayList();
 
                     for(aksiologoumenos item:aksiologoumenoi){
@@ -744,7 +753,18 @@ class mainApp{
                                 }
                             }
                         }
-                        System.out.println(">> "+max1+" <<   "+max1.getPerc()+" %");
+
+                        DecimalFormat df = new DecimalFormat("#.00");
+
+                        if(max1.getPerc() == 0)
+                        {
+                            System.out.println(">> "+max1+" <<   0.00 %");
+                        }
+                        else
+                        {
+                            System.out.println(">> "+max1+" <<   "+df.format(max1.getPerc())+" %");
+                        }
+                        
                         copyEr.remove(max1);
                         b--;
                     }
@@ -798,7 +818,18 @@ class mainApp{
                                 }
                             }
                         }
-                        System.out.println(">> "+max2+" <<   "+max2.getPercAks()+" %");
+
+                        DecimalFormat df = new DecimalFormat("#.00");
+
+                        if(max2.getPercAks() == 0)
+                        {
+                            System.out.println(">> "+max2+" <<   0.00 %");
+                        }
+                        else
+                        {
+                            System.out.println(">> "+max2+" <<   "+df.format(max2.getPercAks())+" %");
+                        }
+
                         copyAksi.remove(max2);
                         q--;
                     }

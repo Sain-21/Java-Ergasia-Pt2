@@ -1,7 +1,7 @@
 RATED_PERSON_LIST
 {
    RATED_PERSON
-   { 
+   {
       CODE 1001
       NAME Xristos
       SURNAME Koutsikas
